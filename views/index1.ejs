@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video</title>
+    <link rel="stylesheet" href="videostyle.css" />
+    <script>
+      const Room = '<%=roomid%>'
+    </script>
+    <script
+      src="https://kit.fontawesome.com/a6a459b372.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="videoss">
+        <div id="video-grid"></div>
+        <div class="btn-bar">
+          <div id="video" class="video-btn" onclick="video_on_off()">
+            <i class="fa-solid fa-video fa-2x"></i>
+          </div>
+          <div id="audio" class="microphone-btn" onclick="mute_on_off()">
+            <i class="fa-solid fa-microphone fa-2x"></i>
+          </div>
+          <div id="invite" class="invite-btn">
+            <i class="fa-solid fa-user-plus fa-2x"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat">
+        <div id="chat-div">
+          <div class="message-container">
+            <input type="text" id="chat-message" />
+          </div>
+        </div>
+
+        <div id="submit">
+          <i class="fa-solid fa-circle-arrow-right fa-2x"></i>
+        </div>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

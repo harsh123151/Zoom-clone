@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+}
+.meeting {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* background-color: rgb(169, 169, 169); */
+}
+.logo {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(29, 161, 242);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-div {
+}
+.logo-img {
+  border-radius: 50%;
+  width: 360px;
+  height: 320px;
+}
+
+.meeting-link {
+  border: 1px solid black;
+  outline: none;
+  height: 40px;
+  width: 250px;
+  border-radius: 8px;
+  padding: auto;
+}
+.join-link {
+  border: none;
+  width: 125px;
+  height: 50px;
+  border-radius: 8px;
+  margin-right: 1rem;
+  background-color: rgb(29, 161, 242);
+  color: white;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.form {
+  margin-left: 1rem;
+}
+.form {
+  display: flex;
+}
