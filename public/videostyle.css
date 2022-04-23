@@ -5,7 +5,8 @@
   overflow: hidden;
 }
 #video-grid {
-  width: 1075px;
+  /* width: 1075px; */
+  width: 100%;
   height: 100vh;
   background-color: rgb(56, 56, 56);
   display: grid;
@@ -124,6 +125,15 @@ h3 {
   .chat {
     display: none;
   }
+  .videoss {
+    width: 100px;
+  }
+}
+
+@media only screen and (max-width: 1535px) {
+  #video-grid {
+    grid-template-columns: auto auto;
+  }
 }
 
 @media only screen and (max-width: 748px) {
@@ -133,5 +143,30 @@ h3 {
 }
 
 .videoss {
+  width: 1075px;
   position: relative;
+}
+
+.sheild,
+.endcall,
+.comment,
+.users {
+  color: lightgray;
+  width: 37px;
+  padding: 4px;
+  margin-right: 8px;
+}
+
+.middle-btn {
+  display: flex;
+  margin: auto;
+  margin-top: 7px;
+}
+
+.joined {
+  position: absolute;
+  bottom: 7rem;
+  right: 4rem;
+  color: white;
+  font-size: 17px;
 }

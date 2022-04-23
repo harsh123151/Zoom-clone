@@ -17,15 +17,14 @@ app.use('/', router)
 
 io.on('connection', (socket) => {
   // console.log('Someone conected')
-  socket.on('join-room', (room, userid) => {
+  socket.on('join-room', (room, userid, myname) => {
     socket.join(room)
-    socket.to(room).emit('user-connected', userid)
+    socket.to(room).emit('user-connected', userid, myname)
     socket.on('submit-message', (value, name) => {
       io.to(room).emit('message', value, name)
     })
     socket.on('disconnect', () => {
-      console.log(`${userid} disconnected`)
-      socket.to(room).emit('disconnected', userid)
+      socket.to(room).emit('disconnected', userid, myname)
     })
   })
 })

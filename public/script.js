@@ -1,11 +1,11 @@
+const myname = prompt('Enter your name')
 const socket = io('/')
 const peer = new Peer(undefined, {
   path: '/mypeer',
   host: '/',
   port: '5000',
 })
-const myname = prompt('Enter your name')
-console.log(myname)
+
 const videoGrid = document.getElementById('video-grid')
 const myvideo = document.createElement('video')
 const input = document.getElementById('chat-message')
@@ -14,6 +14,7 @@ const submit = document.getElementById('submit')
 const invite = document.getElementById('invite')
 const video = document.getElementById('video')
 const audio = document.getElementById('audio')
+const joinedinfo = document.getElementById('join')
 input.value = ''
 let myvideoStream
 myvideo.muted = true
@@ -29,7 +30,6 @@ navigator.mediaDevices
   })
 
 peer.on('call', (call) => {
-  console.log('my')
   navigator.mediaDevices
     .getUserMedia({ video: true, audio: false })
     .then((stream) => {
@@ -45,7 +45,7 @@ peer.on('call', (call) => {
 })
 
 peer.on('open', (id) => {
-  socket.emit('join-room', Room, id)
+  socket.emit('join-room', Room, id, myname)
 })
 
 const connectNewUser = (id, stream) => {
@@ -61,8 +61,15 @@ const connectNewUser = (id, stream) => {
   })
 }
 
-socket.on('user-connected', (userid) => {
+socket.on('user-connected', (userid, nam) => {
   connectNewUser(userid, myvideoStream)
+  if (nam == null) {
+    nam = userid
+  }
+  joinedinfo.innerText = `User ${nam} joined`
+  setTimeout(() => {
+    joinedinfo.innerText = ''
+  }, 3000)
 })
 const addVideoStream = (video, stream) => {
   video.srcObject = stream
@@ -78,8 +85,14 @@ socket.on('message', (value, name) => {
   h3.appendChild(document.createTextNode(value))
   div.append(h2, h3)
 })
-socket.on('disconnected', (id) => {
-  console.log(`somone disconnected with id ${id}`)
+socket.on('disconnected', (userid, nam) => {
+  if (nam == null) {
+    nam = userid
+  }
+  joinedinfo.innerText = `User ${nam} left`
+  setTimeout(() => {
+    joinedinfo.innerText = ''
+  }, 3000)
 })
 
 submit.addEventListener('click', (e) => {
@@ -102,7 +115,6 @@ input.addEventListener('keydown', (e) => {
 })
 
 invite.addEventListener('click', async (e) => {
-  console.log('hello')
   const link = 'http://localhost:5000/join/' + Room
   await navigator.clipboard.writeText(link)
   alert('invite linked copied')
@@ -112,20 +124,22 @@ const video_on_off = (e) => {
   let enabled = myvideoStream.getVideoTracks()[0].enabled
   if (enabled) {
     myvideoStream.getVideoTracks()[0].enabled = false
-    video.innerHTML = `<i class="fa-solid fa-video-slash fa-2x"></i>`
+    video.innerHTML = `<i class="fa-solid fa-video-slash "style="font-size: 24px"></i>`
   } else {
     myvideoStream.getVideoTracks()[0].enabled = true
-    video.innerHTML = `<i class="fa-solid fa-video fa-2x"></i>`
+    video.innerHTML = `<i class="fa-solid fa-video "style="font-size: 24px"></i>`
   }
 }
 
 const mute_on_off = () => {
   let enabled = myvideoStream.getAudioTracks()[0].enabled
   if (enabled) {
-    audio.innerHTML = '<i class="fa-solid fa-microphone-slash fa-2x"></i>'
+    audio.innerHTML =
+      '<i class="fa-solid fa-microphone-slash" style="font-size: 24px"></i>'
     myvideoStream.getAudioTracks()[0].enabled = false
   } else {
     myvideoStream.getAudioTracks()[0].enabled = true
-    audio.innerHTML = '<i class="fa-solid fa-microphone fa-2x"></i>'
+    audio.innerHTML =
+      '<i class="fa-solid fa-microphone " style="font-size: 24px"></i>'
   }
 }
