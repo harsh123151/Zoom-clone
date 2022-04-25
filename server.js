@@ -19,6 +19,7 @@ io.on('connection', (socket) => {
   // console.log('Someone conected')
   socket.on('join-room', (room, userid, myname) => {
     socket.join(room)
+
     socket.to(room).emit('user-connected', userid, myname)
     socket.on('submit-message', (value, name) => {
       io.to(room).emit('message', value, name)

@@ -114,11 +114,18 @@ h3 {
 }
 
 .invite-btn {
-  position: absolute;
   color: rgb(29, 161, 242);
-  top: 8px;
-  right: 7px;
   margin-right: 1rem;
+  margin-top: 7px;
+  width: 53px;
+  padding: 4px;
+}
+.joined {
+  position: absolute;
+  bottom: 7rem;
+  right: 4rem;
+  color: white;
+  font-size: 17px;
 }
 
 @media only screen and (max-width: 1054px) {
@@ -140,13 +147,15 @@ h3 {
   #video-grid {
     grid-template-columns: auto;
   }
+  .joined {
+    font-size: 15px;
+  }
 }
-
-.videoss {
-  width: 1075px;
-  position: relative;
-}
-
+/* @media only screen and (max-width: 400px) {
+  #video-grid {
+    height: 93vh;
+  }
+} */
 .sheild,
 .endcall,
 .comment,
@@ -156,17 +165,17 @@ h3 {
   padding: 4px;
   margin-right: 8px;
 }
+.users {
+  width: 53px;
+  padding: 4px;
+}
 
 .middle-btn {
   display: flex;
   margin: auto;
   margin-top: 7px;
 }
-
-.joined {
-  position: absolute;
-  bottom: 7rem;
-  right: 4rem;
-  color: white;
-  font-size: 17px;
+.videoss {
+  width: 1075px;
+  position: relative;
 }

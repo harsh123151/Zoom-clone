@@ -52,7 +52,40 @@ body {
 
 .form {
   margin-left: 1rem;
-}
-.form {
   display: flex;
+}
+
+.join-form {
+  display: flex;
+}
+@media only screen and (max-width: 1112px) {
+  .form {
+    flex-direction: column;
+  }
+  .join-form {
+    margin-top: 1rem;
+  }
+}
+
+@media only screen and (max-width: 832px) {
+  .container {
+    flex-direction: column-reverse;
+  }
+  .logo {
+    width: 100vw;
+    height: 50vh;
+  }
+  .meeting {
+    width: 100vw;
+    height: 50vh;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .meeting-link {
+    width: 200px;
+  }
+  .join-link {
+    width: 120px;
+  }
 }

@@ -15,6 +15,7 @@ const invite = document.getElementById('invite')
 const video = document.getElementById('video')
 const audio = document.getElementById('audio')
 const joinedinfo = document.getElementById('join')
+const total = document.getElementById('total')
 input.value = ''
 let myvideoStream
 myvideo.muted = true
@@ -22,7 +23,7 @@ myvideo.muted = true
 navigator.mediaDevices
   .getUserMedia({
     video: true,
-    audio: true,
+    audio: false,
   })
   .then((stream) => {
     myvideoStream = stream
@@ -30,6 +31,7 @@ navigator.mediaDevices
   })
 
 peer.on('call', (call) => {
+  total.innerText = parseInt(total.innerText) + 1
   navigator.mediaDevices
     .getUserMedia({ video: true, audio: false })
     .then((stream) => {
@@ -45,12 +47,12 @@ peer.on('call', (call) => {
 })
 
 peer.on('open', (id) => {
+  total.innerText = parseInt(total.innerText) + 1
   socket.emit('join-room', Room, id, myname)
 })
 
 const connectNewUser = (id, stream) => {
   const caller = peer.call(id, stream)
-
   const video = document.createElement('video')
 
   caller.on('stream', () => {
@@ -62,11 +64,13 @@ const connectNewUser = (id, stream) => {
 }
 
 socket.on('user-connected', (userid, nam) => {
+  total.innerText = parseInt(total.innerText) + 1
   connectNewUser(userid, myvideoStream)
   if (nam == null) {
     nam = userid
   }
   joinedinfo.innerText = `User ${nam} joined`
+
   setTimeout(() => {
     joinedinfo.innerText = ''
   }, 3000)
@@ -86,6 +90,7 @@ socket.on('message', (value, name) => {
   div.append(h2, h3)
 })
 socket.on('disconnected', (userid, nam) => {
+  total.innerText = parseInt(total.innerText) - 1
   if (nam == null) {
     nam = userid
   }

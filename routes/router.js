@@ -1,5 +1,6 @@
 const express = require('express')
 const { v4: uuidv4 } = require('uuid')
+const uuid = require('uuid')
 const router = express.Router()
 router.get('/', (req, res) => {
   res.render('index')
@@ -10,7 +11,14 @@ router.get('/link', (req, res) => {
 })
 router.get('/join/:roomid', (req, res) => {
   const { roomid } = req.params
-  res.render('index1', { roomid })
+  if (uuid.validate(roomid)) {
+    res.render('index1', { roomid })
+  } else {
+    res.render('Notfound')
+  }
 })
 
+router.get('*', (req, res) => {
+  res.render('Notfound')
+})
 module.exports = router
