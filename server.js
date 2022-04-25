@@ -29,6 +29,4 @@ io.on('connection', (socket) => {
     })
   })
 })
-server.listen(port, () => {
-  console.log(`Server started listening on ${port}`)
-})
+server.listen(process.env.PORT || 3030)
