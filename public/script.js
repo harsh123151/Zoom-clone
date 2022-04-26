@@ -55,8 +55,8 @@ const connectNewUser = (id, stream) => {
   const caller = peer.call(id, stream)
   const video = document.createElement('video')
 
-  caller.on('stream', () => {
-    addVideoStream(video, stream)
+  caller.on('stream', (newstream) => {
+    addVideoStream(video, newstream)
   })
   caller.on('error', () => {
     console.log('Something went wron on stream')
