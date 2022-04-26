@@ -28,12 +28,35 @@ navigator.mediaDevices
   .then((stream) => {
     myvideoStream = stream
     addVideoStream(myvideo, stream)
+    socket.on('user-connected', (userid, nam) => {
+      total.innerText = parseInt(total.innerText) + 1
+      connectNewUser(userid, myvideoStream)
+      if (nam == null) {
+        nam = userid
+      }
+      joinedinfo.innerText = `User ${nam} joined`
+
+      setTimeout(() => {
+        joinedinfo.innerText = ''
+      }, 3000)
+    })
+
+    socket.on('disconnected', (userid, nam) => {
+      total.innerText = parseInt(total.innerText) - 1
+      if (nam == null) {
+        nam = userid
+      }
+      joinedinfo.innerText = `User ${nam} left`
+      setTimeout(() => {
+        joinedinfo.innerText = ''
+      }, 3000)
+    })
   })
 
 peer.on('call', (call) => {
   total.innerText = parseInt(total.innerText) + 1
   navigator.mediaDevices
-    .getUserMedia({ video: true, audio: false })
+    .getUserMedia({ video: true, audio: true })
     .then((stream) => {
       call.answer(stream)
       const video = document.createElement('video')
@@ -59,22 +82,10 @@ const connectNewUser = (id, stream) => {
     addVideoStream(video, newstream)
   })
   caller.on('error', () => {
-    console.log('Something went wron on stream')
+    console.log('Something went wrong on stream')
   })
 }
 
-socket.on('user-connected', (userid, nam) => {
-  total.innerText = parseInt(total.innerText) + 1
-  connectNewUser(userid, myvideoStream)
-  if (nam == null) {
-    nam = userid
-  }
-  joinedinfo.innerText = `User ${nam} joined`
-
-  setTimeout(() => {
-    joinedinfo.innerText = ''
-  }, 3000)
-})
 const addVideoStream = (video, stream) => {
   video.srcObject = stream
   video.addEventListener('loadedmetadata', () => {
@@ -88,16 +99,6 @@ socket.on('message', (value, name) => {
   h2.appendChild(document.createTextNode(name))
   h3.appendChild(document.createTextNode(value))
   div.append(h2, h3)
-})
-socket.on('disconnected', (userid, nam) => {
-  total.innerText = parseInt(total.innerText) - 1
-  if (nam == null) {
-    nam = userid
-  }
-  joinedinfo.innerText = `User ${nam} left`
-  setTimeout(() => {
-    joinedinfo.innerText = ''
-  }, 3000)
 })
 
 submit.addEventListener('click', (e) => {
