@@ -160,6 +160,10 @@ h3 {
   #video-grid {
     grid-template-columns: auto;
   }
+  video {
+    width: 300px;
+    height: 150px;
+  }
 }
 .sheild,
 .endcall,
