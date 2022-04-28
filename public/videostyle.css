@@ -141,21 +141,26 @@ h3 {
   #video-grid {
     grid-template-columns: auto auto;
   }
+  video {
+    width: 350px;
+    height: 250px;
+  }
 }
 
 @media only screen and (max-width: 748px) {
-  #video-grid {
-    grid-template-columns: auto;
+  video {
+    width: 250px;
+    height: 200px;
   }
   .joined {
     font-size: 15px;
   }
 }
-/* @media only screen and (max-width: 400px) {
+@media only screen and (max-width: 548px) {
   #video-grid {
-    height: 93vh;
+    grid-template-columns: auto;
   }
-} */
+}
 .sheild,
 .endcall,
 .comment,
