@@ -43,6 +43,8 @@ navigator.mediaDevices
   })
 
 socket.on('disconnected', (userid, nam) => {
+  console.log('hello')
+  console.log(peers)
   if (peers[userid]) peers[userid].close()
   total.innerText = parseInt(total.innerText) - 1
   if (nam == null) {
