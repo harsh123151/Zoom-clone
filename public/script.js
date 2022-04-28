@@ -5,7 +5,7 @@ const peer = new Peer(undefined, {
   host: '/',
   port: '443',
 })
-
+const peers = {}
 const videoGrid = document.getElementById('video-grid')
 const myvideo = document.createElement('video')
 const input = document.getElementById('chat-message')
@@ -42,6 +42,7 @@ navigator.mediaDevices
     })
 
     socket.on('disconnected', (userid, nam) => {
+      if (peers[userid]) peers[userid].close()
       total.innerText = parseInt(total.innerText) - 1
       if (nam == null) {
         nam = userid
@@ -58,7 +59,7 @@ peer.on('call', (call) => {
   navigator.mediaDevices
     .getUserMedia({ video: true, audio: true })
     .then((stream) => {
-      call.answer(stream)
+      call.answer(myvideoStream)
       const video = document.createElement('video')
       call.on('stream', (userstream) => {
         addVideoStream(video, userstream)
@@ -81,9 +82,13 @@ const connectNewUser = (id, stream) => {
   caller.on('stream', (newstream) => {
     addVideoStream(video, newstream)
   })
+  caller.on('close', () => {
+    video.remove()
+  })
   caller.on('error', () => {
     console.log('Something went wrong on stream')
   })
+  peers[id] = caller
 }
 
 const addVideoStream = (video, stream) => {
@@ -121,7 +126,7 @@ input.addEventListener('keydown', (e) => {
 })
 
 invite.addEventListener('click', async (e) => {
-  const link = 'http://localhost:5000/join/' + Room
+  const link = window.location.origin + '/join/' + Room
   await navigator.clipboard.writeText(link)
   alert('invite linked copied')
 })
