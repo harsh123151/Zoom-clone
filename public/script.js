@@ -40,21 +40,19 @@ navigator.mediaDevices
         joinedinfo.innerText = ''
       }, 3000)
     })
-  })
 
-socket.on('disconnected', (userid, nam) => {
-  console.log('hello')
-  console.log(peers)
-  if (peers[userid]) peers[userid].close()
-  total.innerText = parseInt(total.innerText) - 1
-  if (nam == null) {
-    nam = userid
-  }
-  joinedinfo.innerText = `User ${nam} left`
-  setTimeout(() => {
-    joinedinfo.innerText = ''
-  }, 3000)
-})
+    socket.on('disconnected', (userid, nam) => {
+      if (peers[userid]) peers[userid].close()
+      total.innerText = parseInt(total.innerText) - 1
+      if (nam == null) {
+        nam = userid
+      }
+      joinedinfo.innerText = `User ${nam} left`
+      setTimeout(() => {
+        joinedinfo.innerText = ''
+      }, 3000)
+    })
+  })
 
 peer.on('call', (call) => {
   total.innerText = parseInt(total.innerText) + 1
