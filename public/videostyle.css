@@ -89,7 +89,9 @@ h2 {
 }
 
 h3 {
+  overflow-wrap: break-word;
   margin-left: 8px;
+  margin-right: 8px;
 }
 
 .btn-bar {
@@ -148,6 +150,9 @@ h3 {
 }
 
 @media only screen and (max-width: 748px) {
+  #video-grid {
+    grid-template-columns: auto;
+  }
   video {
     width: 250px;
     height: 200px;
@@ -156,15 +161,7 @@ h3 {
     font-size: 15px;
   }
 }
-@media only screen and (max-width: 548px) {
-  #video-grid {
-    grid-template-columns: auto;
-  }
-  video {
-    width: 300px;
-    height: 150px;
-  }
-}
+
 .sheild,
 .endcall,
 .comment,

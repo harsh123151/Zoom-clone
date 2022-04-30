@@ -3,7 +3,7 @@ const socket = io('/')
 const peer = new Peer(undefined, {
   path: '/mypeer',
   host: '/',
-  port: '443',
+  port: '5000',
 })
 const peers = {}
 const videoGrid = document.getElementById('video-grid')
@@ -16,6 +16,7 @@ const video = document.getElementById('video')
 const audio = document.getElementById('audio')
 const joinedinfo = document.getElementById('join')
 const total = document.getElementById('total')
+const end = document.getElementById('end')
 input.value = ''
 let myvideoStream
 myvideo.muted = true
@@ -42,8 +43,11 @@ navigator.mediaDevices
     })
 
     socket.on('disconnected', (userid, nam) => {
-      if (peers[userid]) peers[userid].close()
       total.innerText = parseInt(total.innerText) - 1
+
+      if (peers[userid]) {
+        peers[userid].close()
+      }
       if (nam == null) {
         nam = userid
       }
@@ -55,6 +59,7 @@ navigator.mediaDevices
   })
 
 peer.on('call', (call) => {
+  peers[call.peer] = call
   total.innerText = parseInt(total.innerText) + 1
   navigator.mediaDevices
     .getUserMedia({ video: true, audio: true })
@@ -67,6 +72,9 @@ peer.on('call', (call) => {
       call.on('error', (err) => {
         console.log(err)
       })
+      call.on('close', () => {
+        video.remove()
+      })
     })
 })
 
@@ -78,7 +86,6 @@ peer.on('open', (id) => {
 const connectNewUser = (id, stream) => {
   const caller = peer.call(id, stream)
   const video = document.createElement('video')
-
   caller.on('stream', (newstream) => {
     addVideoStream(video, newstream)
   })
@@ -99,11 +106,13 @@ const addVideoStream = (video, stream) => {
   videoGrid.append(video)
 }
 socket.on('message', (value, name) => {
+  const div1 = document.createElement('div')
   const h2 = document.createElement('h2')
   const h3 = document.createElement('h3')
   h2.appendChild(document.createTextNode(name))
   h3.appendChild(document.createTextNode(value))
-  div.append(h2, h3)
+  div1.append(h2, h3)
+  div.append(div1)
 })
 
 submit.addEventListener('click', (e) => {
@@ -154,3 +163,7 @@ const mute_on_off = () => {
       '<i class="fa-solid fa-microphone " style="font-size: 24px"></i>'
   }
 }
+
+end.addEventListener('click', (e) => {
+  window.location = window.location.origin
+})
