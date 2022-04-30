@@ -113,6 +113,7 @@ socket.on('message', (value, name) => {
   h3.appendChild(document.createTextNode(value))
   div1.append(h2, h3)
   div.append(div1)
+  scrollToBottom()
 })
 
 submit.addEventListener('click', (e) => {
@@ -166,4 +167,17 @@ const mute_on_off = () => {
 
 end.addEventListener('click', (e) => {
   window.location = window.location.origin
+})
+
+window.addEventListener('load', () => {
+  window.scrollBy(0, 100)
+})
+
+const scrollToBottom = () => {
+  var d = $('#chat-div')
+  d.scrollTop(d.prop('scrollHeight') + 20)
+}
+
+window.addEventListener('load', () => {
+  $(document).scrollTop($(document).prop('scrollHeight'))
 })

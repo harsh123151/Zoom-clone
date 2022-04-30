@@ -76,7 +76,7 @@ li {
   color: white;
   margin-left: 8px;
   width: 100%;
-  height: 100%;
+  height: 90%;
   overflow-y: scroll;
 }
 #chat-div::-webkit-scrollbar {
