@@ -191,20 +191,13 @@ crossbtn.addEventListener('click', () => {
   videocontainer.style.cssText = 'display:block'
   chat.style.cssText = 'display:none'
 })
-// document.addEventListener('load', () => {
+
+// window.addEventListener('resize', () => {
 //   if (window.innerWidth > 1054) {
 //     videocontainer.style.cssText = 'display:block'
 //     chat.style.cssText = 'display:block'
 //   } else {
+//     videocontainer.style.cssText = 'display:block'
 //     chat.style.cssText = 'display:none'
 //   }
 // })
-window.addEventListener('resize', () => {
-  if (window.innerWidth > 1054) {
-    videocontainer.style.cssText = 'display:block'
-    chat.style.cssText = 'display:block'
-  } else {
-    videocontainer.style.cssText = 'display:block'
-    chat.style.cssText = 'display:none'
-  }
-})
