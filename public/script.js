@@ -191,12 +191,3 @@ crossbtn.addEventListener('click', () => {
   videocontainer.style.cssText = 'display:block'
   chat.style.cssText = 'display:none'
 })
-
-window.addEventListener('resize', () => {
-  if (window.innerWidth > 1054) {
-    chat.style.cssText = 'display:block'
-  } else {
-    chat.style.cssText = 'display:none'
-    videocontainer.style.cssText = 'display:block'
-  }
-})

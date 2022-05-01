@@ -209,7 +209,7 @@ h3 {
   position: relative;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 500px) {
   .fsize {
     font-size: 20px !important;
   }
@@ -227,5 +227,8 @@ h3 {
   }
   .invite-btn {
     width: 31px;
+  }
+  .sheild {
+    display: none;
   }
 }
