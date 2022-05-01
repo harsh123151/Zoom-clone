@@ -10,6 +10,7 @@ const videoGrid = document.getElementById('video-grid')
 const myvideo = document.createElement('video')
 const input = document.getElementById('chat-message')
 const div = document.getElementById('chat-div')
+const chat = document.getElementById('chattt')
 const submit = document.getElementById('submit')
 const invite = document.getElementById('invite')
 const video = document.getElementById('video')
@@ -17,6 +18,9 @@ const audio = document.getElementById('audio')
 const joinedinfo = document.getElementById('join')
 const total = document.getElementById('total')
 const end = document.getElementById('end')
+const messagebtn = document.getElementById('message')
+const videocontainer = document.querySelector('.videoss')
+const crossbtn = document.getElementById('cross')
 input.value = ''
 let myvideoStream
 myvideo.muted = true
@@ -178,6 +182,22 @@ const scrollToBottom = () => {
   d.scrollTop(d.prop('scrollHeight') + 20)
 }
 
-window.addEventListener('load', () => {
-  $(document).scrollTop($(document).prop('scrollHeight'))
+messagebtn.addEventListener('click', () => {
+  videocontainer.style.cssText = 'display:none'
+  chat.style.cssText = 'display:block;width:100vw;height:100vh'
+})
+
+crossbtn.addEventListener('click', () => {
+  videocontainer.style.cssText = 'display:block'
+  chat.style.cssText = 'display:none'
+})
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 1054) {
+    videocontainer.style.cssText = 'display:block'
+    chat.style.cssText = 'display:block'
+  } else {
+    console.log('hello')
+    chat.style.cssText = 'display:none'
+  }
 })
