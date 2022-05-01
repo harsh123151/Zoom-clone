@@ -184,7 +184,7 @@ const scrollToBottom = () => {
 
 messagebtn.addEventListener('click', () => {
   videocontainer.style.cssText = 'display:none'
-  chat.style.cssText = 'display:block;width:100%;height:100%'
+  chat.style.cssText = 'display:block;width:100vw;height:100vh'
 })
 
 crossbtn.addEventListener('click', () => {
