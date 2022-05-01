@@ -63,7 +63,7 @@ video {
 
 #submit {
   position: absolute;
-  bottom: 0;
+  bottom: 6px;
   right: 0;
 
   margin-right: 8px;
@@ -212,5 +212,11 @@ h3 {
 @media only screen and (max-width: 600px) {
   .fsize {
     font-size: 20px !important;
+  }
+  h2 {
+    font-size: 13px;
+  }
+  h3 {
+    font-size: 15px;
   }
 }
