@@ -4,13 +4,7 @@
   box-sizing: border-box;
   overflow: hidden;
 }
-body {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-}
-html {
-  height: -webkit-fill-available;
-}
+
 #video-grid {
   /* width: 1075px; */
   width: 100%;
