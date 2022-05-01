@@ -184,20 +184,10 @@ const scrollToBottom = () => {
 
 messagebtn.addEventListener('click', () => {
   videocontainer.style.cssText = 'display:none'
-  chat.style.cssText = 'display:block;width:100vw;height:100vh'
+  chat.style.cssText = 'display:block;width:100%;height:100%'
 })
 
 crossbtn.addEventListener('click', () => {
   videocontainer.style.cssText = 'display:block'
   chat.style.cssText = 'display:none'
 })
-
-// window.addEventListener('resize', () => {
-//   if (window.innerWidth > 1054) {
-//     videocontainer.style.cssText = 'display:block'
-//     chat.style.cssText = 'display:block'
-//   } else {
-//     videocontainer.style.cssText = 'display:block'
-//     chat.style.cssText = 'display:none'
-//   }
-// })
