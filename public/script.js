@@ -197,7 +197,6 @@ window.addEventListener('resize', () => {
     videocontainer.style.cssText = 'display:block'
     chat.style.cssText = 'display:block'
   } else {
-    console.log('hello')
     chat.style.cssText = 'display:none'
   }
 })
