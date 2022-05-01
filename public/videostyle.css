@@ -219,4 +219,13 @@ h3 {
   h3 {
     font-size: 15px;
   }
+  .sheild,
+  .endcall,
+  .comment,
+  .users {
+    margin-right: 4px;
+  }
+  .invite-btn {
+    width: 31px;
+  }
 }
