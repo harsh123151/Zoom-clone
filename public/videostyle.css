@@ -9,9 +9,8 @@ body {
   height: 100%;
 }
 #video-grid {
-  /* width: 1075px; */
   width: 100%;
-  height: 100%;
+
   background-color: rgb(56, 56, 56);
   display: grid;
   grid-template-columns: auto auto auto;
@@ -80,9 +79,6 @@ li {
 #chat-div {
   color: white;
   margin-left: 8px;
-  width: 100%;
-  height: 90%;
-
   overflow-y: scroll;
 }
 #chat-div::-webkit-scrollbar {

@@ -5,11 +5,14 @@ const peer = new Peer(undefined, {
   host: '/',
   port: '443',
 })
+const height = window.innerHeight
 const peers = {}
 const videoGrid = document.getElementById('video-grid')
+videoGrid.style.cssText = `height:${height - 60}px`
 const myvideo = document.createElement('video')
 const input = document.getElementById('chat-message')
 const div = document.getElementById('chat-div')
+div.style.cssText = `height:${height - 60}px`
 const chat = document.getElementById('chattt')
 const submit = document.getElementById('submit')
 const invite = document.getElementById('invite')
@@ -190,4 +193,14 @@ messagebtn.addEventListener('click', () => {
 crossbtn.addEventListener('click', () => {
   videocontainer.style.cssText = 'display:block'
   chat.style.cssText = 'display:none'
+})
+
+window.addEventListener('resize', () => {
+  let height = window.innerHeight
+  videoGrid.style.cssText = `height:${height - 60}px`
+  div.style.cssText = `height:${height - 60}px`
+  if (window.innerWidth > 1054) {
+    videocontainer.style.cssText = 'display:block'
+    chat.style.cssText = 'width:464px'
+  }
 })
