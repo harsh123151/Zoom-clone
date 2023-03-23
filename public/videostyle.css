@@ -27,6 +27,9 @@ body {
 video {
   width: 350px;
   height: 250px;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg); /* Safari and Chrome */
+  -moz-transform: rotateY(180deg); /* Firefox */
 }
 .container {
   display: flex;
@@ -225,4 +228,9 @@ h3 {
   .sheild {
     display: none;
   }
+}
+
+.timer-text {
+  font-size: 20px;
+  font-weight: bold;
 }

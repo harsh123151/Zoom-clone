@@ -3,7 +3,7 @@ const socket = io('/')
 const peer = new Peer(undefined, {
   path: '/mypeer',
   host: '/',
-  port: '443',
+  port: '8080',
 })
 const height = window.innerHeight
 const peers = {}
@@ -27,7 +27,6 @@ const crossbtn = document.getElementById('cross')
 input.value = ''
 let myvideoStream
 myvideo.muted = true
-
 navigator.mediaDevices
   .getUserMedia({
     video: true,
@@ -38,7 +37,7 @@ navigator.mediaDevices
     addVideoStream(myvideo, stream)
     socket.on('user-connected', (userid, nam) => {
       total.innerText = parseInt(total.innerText) + 1
-      connectNewUser(userid, myvideoStream)
+      connectNewUser(userid, myvideoStream, nam, myname)
       if (nam == null) {
         nam = userid
       }
@@ -51,7 +50,6 @@ navigator.mediaDevices
 
     socket.on('disconnected', (userid, nam) => {
       total.innerText = parseInt(total.innerText) - 1
-
       if (peers[userid]) {
         peers[userid].close()
       }
@@ -67,6 +65,7 @@ navigator.mediaDevices
 
 peer.on('call', (call) => {
   peers[call.peer] = call
+  console.log(peers)
   total.innerText = parseInt(total.innerText) + 1
   navigator.mediaDevices
     .getUserMedia({ video: true, audio: true })
@@ -102,6 +101,7 @@ const connectNewUser = (id, stream) => {
   caller.on('error', () => {
     console.log('Something went wrong on stream')
   })
+
   peers[id] = caller
 }
 
