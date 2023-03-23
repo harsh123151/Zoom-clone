@@ -3,7 +3,7 @@ const socket = io('/')
 const peer = new Peer(undefined, {
   path: '/mypeer',
   host: '/',
-  port: '8080',
+  port: '443',
 })
 const height = window.innerHeight
 const peers = {}
